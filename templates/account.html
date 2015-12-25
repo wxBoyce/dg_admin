@@ -1,0 +1,130 @@
+{%extends basic.html%}
+
+{% block content %}
+<h1 class="page-title">
+    <i class="icon-th-large"></i>
+    User Account
+</h1>
+
+<div class="row">
+    <div class="span9">
+        <div class="widget">
+
+            <div class="widget-header">
+                <h3>Basic Information</h3>
+            </div> <!-- /widget-header -->
+
+            <div class="widget-content">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#1" data-toggle="tab">Profile</a></li>
+                        <li><a href="#2" data-toggle="tab">Shop</a></li>
+                    </ul>
+
+                    <br />
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                            <form id="edit-profile" class="form-horizontal" />
+                                <fieldset>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="username">Username</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium disabled" id="username" value="goideate" disabled="" />
+                                            <p class="help-block">Your username is for logging in and cannot be changed.</p>
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="wechat_name">WeChat</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="wechat_name" value="Rod" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="QQ_number">QQ</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="QQ_number" value="Howard" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="tel_number">Tel</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="tel_number" value="" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="email">Email Address</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-large" id="email" value="rod.howard@example.com" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <br /><br />
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="password1">Password</label>
+                                        <div class="controls">
+                                            <input type="password" class="input-medium" id="password1" value="password" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="password2">Confirm</label>
+                                        <div class="controls">
+                                            <input type="password" class="input-medium" id="password2" value="password" />
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <br />
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button class="btn">Cancel</button>
+                                    </div> <!-- /form-actions -->
+
+                                </fieldset>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane" id="2">
+                            <form id="edit-profile2" class="form-horizontal" />
+                                <fieldset>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="shop_name">Shop Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-medium" id="shop_name" value="Rod" />
+                                            <p class="help-block">Your shop's name can't be changed frequently.</p>
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="shop_introduction">Shop Introduction</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge" id="shop_introduction" value="" />
+                                            <p class="help-block">The brief introduction of your shop.</p>
+                                        </div> <!-- /controls -->
+                                    </div> <!-- /control-group -->
+
+                                    <br />
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">Save</button> <button class="btn">Cancel</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% end %}

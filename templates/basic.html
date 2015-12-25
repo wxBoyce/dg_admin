@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dg Admin</title>
+
+    {% block title %}
+    {% end %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link href="{{static_url('css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{static_url('css/bootstrap-responsive.min.css')}}" rel="stylesheet" />
+    <link href="{{static_url('css/font-awesome.css')}}" rel="stylesheet" />
+
+    <link href="{{static_url('css/adminia.css')}}" rel="stylesheet" />
+    <link href="{{static_url('css/adminia-responsive.css')}}" rel="stylesheet" />
+
+    {% block meta %}
+    {% end %}
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">dg Admin</a>
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        {% if extra_info.has_key('prompt')%}
+                            <li><a href="#"><span class="badge badge-warning">{{ extra_info['prompt'] }}</span></a></li>
+                        {% end %}
+
+                        <li class="divider-vertical"></li>
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                                {{ extra_info['nickname'] }} <b class="caret"></b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="/"><i class="icon-user"></i> Account Setting  </a></li>
+                                <li><a href="/"><i class="icon-lock"></i> Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/"><i class="icon-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> <!-- /nav-collapse -->
+
+            </div> <!-- /container -->
+        </div> <!-- /navbar-inner -->
+    </div> <!-- /navbar -->
+
+
+    <div id="content">
+        <div class="container">
+            <div class="row">
+
+                <div class="span3">
+                    <div class="account-container">
+                        <div class="account-avatar">
+                            {% if extra_info['avatar'] %}
+                                <img src="{{ extra_info['avatar'] }}" alt="" class="thumbnail" />
+                            {% else %}
+                                <img src="" alt="" class="thumbnail" />
+                            {% end %}
+                        </div> <!-- /account-avatar -->
+
+                        <div class="account-details">
+                            <span class="account-name">{{ extra_info['nickname'] }}</span>
+                            <span class="account-role">{{ extra_info['role'] }}</span>
+                            <span class="account-actions">
+                                <a href="javascript:">Profile</a> |
+                                <a href="javascript:">Edit Shop</a>
+                            </span>
+                        </div> <!-- /account-details -->
+                    </div> <!-- /account-container -->
+
+                    <hr />
+
+                    <ul id="main-nav" class="nav nav-tabs nav-stacked">
+                        <li>
+                            <a href="/">
+                                <i class="icon-pushpin"></i>
+                                Goods-Info-Manage
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/">
+                                <i class="icon-user"></i>
+                                User Account
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/">
+                                <i class="icon-lock"></i>
+                                Login
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr />
+
+                    <div class="sidebar-extra">
+                        {% block side%}
+                        {% end %}
+                    </div> <!-- .sidebar-extra -->
+
+                    <br />
+                </div> <!-- /span3 -->
+
+                <div class="span9">
+
+                    {% block content %}
+                    {% end %}
+
+                </div>
+
+            </div> <!-- /row -->
+        </div> <!-- /container -->
+    </div> <!-- /content -->
+
+    <div id="footer">
+
+        <div class="container">
+            <hr />
+            <p>&copy; 2015 HongKong GO <a href="#" target="_blank" title="">HongKong GO</a> - Created By <a href="#" title="网页模板" target="_blank">Boyce Yang</a></p>
+        </div> <!-- /container -->
+
+    </div> <!-- /footer -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{{static_url('js/jquery-1.7.2.min.js')}}"></script>
+    <script src="{{static_url('js/bootstrap.js')}}"></script>
+
+    <script src="{{static_url('js/jquery.flot.js')}}"></script>
+    <script src="{{static_url('js/jquery.flot.pie.js')}}"></script>
+    <script src="{{static_url('js/jquery.flot.orderBars.js')}}"></script>
+    <script src="{{static_url('js/jquery.flot.resize.js')}}"></script>
+
+    <script src="{{static_url('js/excanvas.min.js')}}"></script>
+
+    {% block js%}
+    {% end %}
+
+</body>
+</html>
