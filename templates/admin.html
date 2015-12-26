@@ -1,0 +1,32 @@
+{% extends login.html %}
+{% block title %} {%  end %}
+{% block content %}
+<div id="login-container">
+    <div id="login-header">
+        <h3>添加用户</h3>
+    </div>
+    <div id="login-content" class="clearfix">
+        <form action="/admin" method='post'>
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label">用户名</label>
+                    <div class="controls">
+                        <input type="text" autocomplete="off" name="user_name" placeholder=""/>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">登录密码</label>
+                        <div class="controls">
+                            <input type="password" autocomplete="off" name="pwd" placeholder=""/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-warning btn-large">
+                    添加
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% end %}

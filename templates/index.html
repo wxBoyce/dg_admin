@@ -9,15 +9,15 @@
 
 <div class="widget">
     <div class="widget-content">
-        <form class="navbar-form page-header" method="post" action="/" style="float: left">
+        <form class="navbar-form page-header" method="get" action="/goods/create" style="float: left">
             <div class="control-group" style="margin-top: -12px;margin-left: 1px;float: left">
                 <div class="controls">
-                    <button type="submit" class="btn btn-success input-block-level">导出全部</button>
+                    <button type="submit" class="btn btn-success input-block-level">添加新商品</button>
                 </div>
             </div>
         </form>
-        <form class="navbar-form page-header" method="get" action="/" style="float: right">
-            <input type="text" class="form-control" placeholder="按照商品名称" name="keyword" style="margin-top: -13px;margin-left: 220px;float: left">
+        <form class="navbar-form page-header" method="get" action="/search" style="float: right">
+            <input type="text" class="form-control" placeholder="按照商品名称" name="goodsname" style="margin-top: -13px;margin-left: 220px;float: left">
             <div class="control-group" style="margin-top: -13px;margin-left: 1px;float: left">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary">Search</button>
@@ -46,62 +46,70 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for goods_info in goods_info_list%}
                         <tr>
-                            <td>1</td>
-                            <td>Test</td>
-                            <td>Nothing</td>
-                            <td>T,T,T</td>
-                            <td>H,H,H,H,H</td>
-                            <td>2015-12-23</td>
-                            <td>上架</td>
+                            <td><a href="/goods/view?id={{ goods_info['id'] }}">{{ goods_info['id'] }}</a></td>
+                            <td>{{ goods_info['owner'] }}</td>
+                            <td>{{ goods_info['goodsname'] }}</td>
+                            <td>{{ goods_info['picurls'] }}</td>
+                            <td>{{ goods_info['goodsdesp'] }}</td>
+                            <td>{{ goods_info['created_at'][0:10] }}</td>
+                            <td>
+                                {%if goods_info['status'] == 'err' %}
+                                    下架
+                                {% else %}
+                                    在售
+                                {% end %}
+                            </td>
                             <td>
 
-									<button type="button" onclick="setUserStatus(this, 'active')"
-											value=""
-											name=""
-											id="1"
-											class="btn btn-mini btn-success btn-xs" >恢复</button>
+                                {%if goods_info['status'] == 'err' %}
+                                    <button type="button" onclick="activeGoodsStatus(this)"
+                                        value="{{ goods_info['id'] }}"
+                                        name="goods_id"
+                                        class="btn btn-mini btn-success btn-xs" >恢复</button>
 
-									<button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">屏蔽</button>
-
-									<button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">恢复</button>
-									<button type="button" onclick="setUserStatus(this, 'shield')"
-										value=""
-										name=""
-										id="2"
-										class="btn btn-danger btn-mini btn-xs">屏蔽</button>
+                                    <button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">屏蔽</button>
+                                {% else %}
+                                    <button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">恢复</button>
+                                    <button type="button" onclick="shieldGoodsStatus(this)"
+                                        value="{{ goods_info['id'] }}"
+                                        name="goods_id"
+                                        class="btn btn-danger btn-mini btn-xs">屏蔽</button>
+                                {% end %}
 
                             </td>
                         </tr>
+                        {% end %}
                     </tbody>
                 </table>
 
                 {%if total_page > 1%}
                 <div id="page-section">
-                    <a href="#"><button type="button" class="btn btn-default">First</button></a>
+                    <a href="/index"><button type="button" class="btn btn-default">First</button></a>
 
                     {%if cur_page > 1%}
-                        <a href="#?page={{cur_page-1}}"><button type="button" class="btn btn-default">{{cur_page-1}}</button></a>
+                        <a href="/index?page={{cur_page-1}}"><button type="button" class="btn btn-default">{{cur_page-1}}</button></a>
                     {%end%}
 
                     <button type="button" class="btn btn-default" style="border-color:#388BFF">{{cur_page}}</button>
 
                     {%if total_page-cur_page > 10%}
                         {%for i in range(cur_page+1, cur_page+5)%}
-                            <a href="#?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
+                            <a href="/index?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
                         {%end%}
-			                <a href="#?page={{cur_page+5}}"><button type="button" class="btn btn-default">...</button></a>
+			                <a href="/index?page={{cur_page+5}}"><button type="button" class="btn btn-default">...</button></a>
                         {%for i in range(total_page-5, total_page+1)%}
-                            <a href="#?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
+                            <a href="/index?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
                         {%end%}
                     {%end%}
 
                     {%if total_page-cur_page <= 10%}
                         {%for i in range(cur_page+1, total_page+1)%}
-                            <a href="#?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
+                            <a href="/index?page={{i}}"><button type="button" class="btn btn-default">{{i}}</button></a>
                         {%end%}
                     {%end%}
-		                <a href="#?page={{total_page}}"><button type="button" class="btn btn-default">Last</button></a>
+		                <a href="/index?page={{total_page}}"><button type="button" class="btn btn-default">Last</button></a>
 
                 </div>
                 {%end%}
@@ -115,12 +123,16 @@
 
 {% block js %}
 <script type="text/javascript">
-	$("#sidebar li").eq(3).attr('class', 'active');
-	function setUserStatus(obj , operate){
-		$.post("/admin/user/operate", {userid:obj.value, operation:operate} ,
-			function(data){
-				if (data)
-					alert('操作成功!');
+	$("#main-nav li").eq(0).attr('class', 'active');
+	function activeGoodsStatus(obj){
+		$.post("/goods/active", {goods_id:obj.value} ,
+			function(){
+				location.reload(true); // 刷新页面很重要
+		});
+	}
+    function shieldGoodsStatus(obj){
+		$.post("/goods/shield", {goods_id:obj.value} ,
+			function(){
 				location.reload(true); // 刷新页面很重要
 		});
 	}

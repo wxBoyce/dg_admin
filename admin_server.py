@@ -11,8 +11,11 @@ import tornado.httpserver
 from tornado.options import define, options
 from logging.handlers import RotatingFileHandler
 
-from handlers.index import IndexHandler
-from handlers.goods import GoodsHandler
+from handlers.user import UserHandler
+from handlers.index import IndexHandler, SearchHandler
+from handlers.login import LoginHandler, LogoutHandler
+from handlers.goods import GoodsHandler, GoodsStausHandle
+from handlers.administrator import AdministratorHandler
 
 
 formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
@@ -35,8 +38,14 @@ class Application(tornado.web.Application):
 
     def __init__(self):
         handlers = [
-            (r"/", IndexHandler),
+            (r"/index", IndexHandler),
+            (r"/login", LoginHandler),
+            (r"/logout", LogoutHandler),
+            (r"/user/(profile|shop)", UserHandler),
+            (r"/search", SearchHandler),
             (r"/goods/(create|view)", GoodsHandler),
+            (r"/goods/(active|shield)", GoodsStausHandle),
+            (r"/admin", AdministratorHandler),
         ]
 
         settings = dict(
@@ -44,6 +53,7 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "statics"),
             ui_modules=dict(
             ),
+            cookie_secret='939d3d573f06c5fed9bf7',
             debug=True,
             gzip=True,
         )

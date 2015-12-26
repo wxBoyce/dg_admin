@@ -53,10 +53,10 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="/"><i class="icon-user"></i> Account Setting  </a></li>
+                                <li><a href="/user/profile"><i class="icon-user"></i> Account Setting  </a></li>
                                 <li><a href="/"><i class="icon-lock"></i> Change Password</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/"><i class="icon-off"></i> Logout</a></li>
+                                <li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -85,8 +85,8 @@
                             <span class="account-name">{{ extra_info['nickname'] }}</span>
                             <span class="account-role">{{ extra_info['role'] }}</span>
                             <span class="account-actions">
-                                <a href="javascript:">Profile</a> |
-                                <a href="javascript:">Edit Shop</a>
+                                <a href="/user/profile#1">Profile</a> |
+                                <a href="/user/shop#2">Edit Shop</a>
                             </span>
                         </div> <!-- /account-details -->
                     </div> <!-- /account-container -->
@@ -95,21 +95,21 @@
 
                     <ul id="main-nav" class="nav nav-tabs nav-stacked">
                         <li>
-                            <a href="/">
+                            <a href="/index">
                                 <i class="icon-pushpin"></i>
                                 Goods-Info-Manage
                             </a>
                         </li>
 
                         <li>
-                            <a href="/">
+                            <a href="/user/profile">
                                 <i class="icon-user"></i>
                                 User Account
                             </a>
                         </li>
 
                         <li>
-                            <a href="/">
+                            <a href="/login">
                                 <i class="icon-lock"></i>
                                 Login
                             </a>

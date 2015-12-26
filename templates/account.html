@@ -25,13 +25,13 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="1">
-                            <form id="edit-profile" class="form-horizontal" />
+                            <form id="edit-profile" class="form-horizontal" method="post" />
                                 <fieldset>
 
                                     <div class="control-group">
                                         <label class="control-label" for="username">Username</label>
                                         <div class="controls">
-                                            <input type="text" class="input-medium disabled" id="username" value="goideate" disabled="" />
+                                            <input type="text" class="input-medium disabled" id="username" value="{{ extra_info['nickname'] }}" disabled="" />
                                             <p class="help-block">Your username is for logging in and cannot be changed.</p>
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
@@ -39,28 +39,28 @@
                                     <div class="control-group">
                                         <label class="control-label" for="wechat_name">WeChat</label>
                                         <div class="controls">
-                                            <input type="text" class="input-medium" id="wechat_name" value="Rod" />
+                                            <input type="text" class="input-medium" name="wechat_name" value="{{ extra_info['wechat'] }}" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
                                     <div class="control-group">
                                         <label class="control-label" for="QQ_number">QQ</label>
                                         <div class="controls">
-                                            <input type="text" class="input-medium" id="QQ_number" value="Howard" />
+                                            <input type="text" class="input-medium" name="QQ_number" value="{{ extra_info['qq'] }}" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
                                     <div class="control-group">
                                         <label class="control-label" for="tel_number">Tel</label>
                                         <div class="controls">
-                                            <input type="text" class="input-medium" id="tel_number" value="" />
+                                            <input type="text" class="input-medium" name="tel_number" value="" disabled="" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
                                     <div class="control-group">
                                         <label class="control-label" for="email">Email Address</label>
                                         <div class="controls">
-                                            <input type="text" class="input-large" id="email" value="rod.howard@example.com" />
+                                            <input type="text" class="input-large" name="email" value="{{ extra_info['email'] }}" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
@@ -69,14 +69,14 @@
                                     <div class="control-group">
                                         <label class="control-label" for="password1">Password</label>
                                         <div class="controls">
-                                            <input type="password" class="input-medium" id="password1" value="password" />
+                                            <input type="password" class="input-medium" name="password1" value="" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
                                     <div class="control-group">
                                         <label class="control-label" for="password2">Confirm</label>
                                         <div class="controls">
-                                            <input type="password" class="input-medium" id="password2" value="password" />
+                                            <input type="password" class="input-medium" name="password2" value="" />
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
 
@@ -92,13 +92,13 @@
                         </div>
 
                         <div class="tab-pane" id="2">
-                            <form id="edit-profile2" class="form-horizontal" />
+                            <form id="edit-profile2" class="form-horizontal" method="post" />
                                 <fieldset>
 
                                     <div class="control-group">
                                         <label class="control-label" for="shop_name">Shop Name</label>
                                         <div class="controls">
-                                            <input type="text" class="input-medium" id="shop_name" value="Rod" />
+                                            <input type="text" class="input-medium" name="shop_name" value="{{ extra_info['shopname'] }}" />
                                             <p class="help-block">Your shop's name can't be changed frequently.</p>
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
@@ -106,7 +106,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="shop_introduction">Shop Introduction</label>
                                         <div class="controls">
-                                            <input type="text" class="input-xlarge" id="shop_introduction" value="" />
+                                            <input type="text" class="input-xlarge" name="shop_introduction" value="{{ extra_info['shopdesp'] }}" />
                                             <p class="help-block">The brief introduction of your shop.</p>
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
@@ -127,4 +127,9 @@
         </div>
     </div>
 </div>
+{% end %}
+{% block js %}
+<script type="text/javascript">
+	$("#main-nav li").eq(1).attr('class', 'active');
+</script>
 {% end %}

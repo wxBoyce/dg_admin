@@ -34,7 +34,10 @@
                 </tr>
                 <tr>
                     <td>商品名称</td>
-                    <td><input type="text" class="input-medium" name="goodsname" value="{{ goods_info['goodsname'] }}" /></td>
+                    <td>
+                        <input type="text" class="input-medium" name="goodsname" value="{{ goods_info['goodsname'] }}" />
+                        <p class="help-block">The Goods Name cant be Null!!</p>
+                    </td>
                 </tr>
                 <tr>
                     <td>图片列表</td>
@@ -60,7 +63,11 @@
                 </tr>
                 <tr>
                     <td>商品简介</td>
-                    <td><input type="text" class="input-xxlarge" name="goodsdesp" value="{{ goods_info['goodsdesp'] }}" /></td>
+                    <td><input type="text" class="input-xlarge" name="goodsdesp" value="{{ goods_info['goodsdesp'] }}" /></td>
+                </tr>
+                <tr>
+                    <td>商品描述</td>
+                    <td><input type="text" class="input-xxlarge" name="content" value="{{ goods_info['content'] }}" /></td>
                 </tr>
                 <tr>
                     <td>商品价格</td>
@@ -74,20 +81,18 @@
                 <tr>
                     <td>操作</td>
                     <td>
-                        {%if goods_info['status'] != 1%}
-                            <button type="button" onclick="setGoodsStatus(this, 'active')"
-                                    value=""
-                                    name=""
-                                    id="1"
+                        {%if goods_info['status'] == 'err' %}
+                            <button type="button" onclick="activeGoodsStatus(this)"
+                                    value="{{ goods_info['id'] }}"
+                                    name="goods_id"
                                     class="btn btn-mini btn-success btn-xs" >恢复</button>
 
                             <button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">屏蔽</button>
                         {% else %}
                             <button type="button" disabled="disabled" class="btn btn-mini btn-default btn-xs">恢复</button>
-                            <button type="button" onclick="setGoodsStatus(this, 'shield')"
-                                    value=""
-                                    name=""
-                                    id="2"
+                            <button type="button" onclick="shieldGoodsStatus(this)"
+                                    value="{{ goods_info['id'] }}"
+                                    name="goods_id"
                                     class="btn btn-danger btn-mini btn-xs">屏蔽</button>
                         {% end %}
                     </td>
@@ -152,11 +157,15 @@
             }
         });
     });
-    function setGoodsStatus(obj , operate){
-		$.post("/", {goods_id:obj.value, operation:operate} ,
-			function(data){
-				if (data)
-					alert('操作成功!');
+    function activeGoodsStatus(obj){
+		$.post("/goods/active", {goods_id:obj.value} ,
+			function(){
+				location.reload(true); // 刷新页面很重要
+		});
+	}
+    function shieldGoodsStatus(obj){
+		$.post("/goods/shield", {goods_id:obj.value} ,
+			function(){
 				location.reload(true); // 刷新页面很重要
 		});
 	}
