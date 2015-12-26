@@ -76,7 +76,7 @@ class GoodsHandler(BasicHandler):
             picurls = '|'.join(pic_url_list)
 
             goods_info = (
-                goodsname, price, goodsdesp, time.strftime('%Y-%m-%d'), ret_user['uid'], picurls, content, str('ok')
+                goodsname, price, goodsdesp, time.strftime('%Y-%m-%d'), ret_user['id'], picurls, content, str('ok')
             )
             goods_id = self.goods_ins.create_goods_info(goods_info)
             if not goods_id:
